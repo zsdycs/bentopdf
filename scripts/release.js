@@ -101,7 +101,7 @@ function main() {
   console.log(`📦 Docker image: bentopdf/bentopdf:${newVersion}`);
   console.log(`📦 Distribution: dist-${newVersion}.zip`);
   console.log(
-    `🏷️  GitHub release: https://github.com/alam00000/bentopdf/releases/tag/${tagName}`
+    `🏷️  GitHub release: https://github.com/zsdycs/bentopdf/releases/tag/${tagName}`
   );
   console.log(
     `💡 Download dist-${newVersion}.zip from the release page for self-hosting.`

@@ -88,7 +88,7 @@ async function updateAnalysisUI() {
   }
 
   if (pagesToRemove.length > 0) {
-    analysisText.textContent = `Found ${pagesToRemove.length} blank page(s) to remove: ${pagesToRemove.join(', ')}`;
+    analysisText.textContent = `找到 ${pagesToRemove.length} 个空白页将被删除：${pagesToRemove.join(', ')}`;
     previewContainer.classList.remove('hidden');
 
     for (const pageNum of pagesToRemove) {
@@ -110,7 +110,7 @@ async function updateAnalysisUI() {
     }
   } else {
     analysisText.textContent =
-      'No blank pages found at this sensitivity level.';
+      '在此敏感度级别下未找到空白页。';
     previewContainer.classList.remove('hidden');
   }
 }

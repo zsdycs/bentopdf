@@ -95,8 +95,8 @@ export async function repairPdf() {
         if (failedRepairs.length > 0) {
             const failedList = failedRepairs.join(', ');
             showAlert(
-                'Partial Success',
-                `Repaired ${successfulRepairs.length} file(s). Failed to repair: ${failedList}`
+                '部分成功',
+                `已修复 ${successfulRepairs.length} 个文件。修复失败：${failedList}`
             );
         }
 

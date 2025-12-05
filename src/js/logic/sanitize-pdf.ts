@@ -565,8 +565,8 @@ export async function sanitizePdf() {
 
     if (!changesMade) {
       showAlert(
-        'No Changes',
-        'No items were selected for removal or none were found in the PDF.'
+        '无更改',
+        '未选择要删除的项目或PDF中未找到任何项目。'
       );
       hideLoader();
       return;

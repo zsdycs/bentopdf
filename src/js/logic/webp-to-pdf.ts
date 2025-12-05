@@ -47,8 +47,8 @@ export async function webpToPdf() {
   } catch (e) {
     console.error(e);
     showAlert(
-      'Error',
-      'Failed to convert WebP to PDF. Ensure all files are valid WebP images.'
+      '错误',
+      '无法将WebP转换为PDF。请确保所有文件都是有效的WebP图像。'
     );
   } finally {
     hideLoader();

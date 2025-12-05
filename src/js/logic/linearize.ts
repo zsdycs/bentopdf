@@ -18,8 +18,8 @@ async function initializeQpdf() {
   } catch (error) {
     console.error('Failed to initialize qpdf-wasm:', error);
     showAlert(
-      'Initialization Error',
-      'Could not load the optimization engine. Please refresh the page and try again.'
+      '初始化错误',
+      '无法加载优化引擎。请刷新页面后重试。'
     );
     throw error;
   } finally {
@@ -114,8 +114,8 @@ export async function linearizePdf() {
   } catch (error: any) {
     console.error('Linearization process error:', error);
     showAlert(
-      'Linearization Failed',
-      `An error occurred: ${error.message || 'Unknown error'}.`
+      '线性化失败',
+      `发生错误：${error.message || '未知错误'}。`
     );
   } finally {
     hideLoader();

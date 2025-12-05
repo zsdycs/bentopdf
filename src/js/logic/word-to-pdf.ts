@@ -133,8 +133,8 @@ export async function wordToPdf() {
     console.error(e);
     hideLoader();
     showAlert(
-      'Preview Error',
-      `Could not generate a preview. The file may be corrupt or contain unsupported features. Error: ${e.message}`
+      '预览错误',
+      `无法生成预览。文件可能已损坏或包含不支持的功能。错误：${e.message}`
     );
   }
 }

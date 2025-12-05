@@ -44,8 +44,8 @@ export async function setupFormFiller() {
   } catch (e) {
     console.error('Critical error setting up form filler:', e);
     showAlert(
-      'Error',
-      'Failed to load PDF form viewer.'
+      '错误',
+      '无法加载PDF表单查看器。'
     );
     hideLoader();
   }
@@ -62,8 +62,8 @@ export async function processAndDownloadForm() {
     if (!viewerWindow) {
       console.error('Cannot access iframe window');
       showAlert(
-        'Download',
-        'Please use the Download button in the PDF viewer toolbar above.'
+        '下载',
+        '请使用上方PDF查看器工具栏中的下载按钮。'
       );
       return;
     }
@@ -72,8 +72,8 @@ export async function processAndDownloadForm() {
     if (!viewerDoc) {
       console.error('Cannot access iframe document');
       showAlert(
-        'Download',
-        'Please use the Download button in the PDF viewer toolbar above.'
+        '下载',
+        '请使用上方PDF查看器工具栏中的下载按钮。'
       );
       return;
     }
@@ -91,16 +91,16 @@ export async function processAndDownloadForm() {
         secondaryDownload.click();
       } else {
         showAlert(
-          'Download',
-          'Please use the Download button in the PDF viewer toolbar above.'
+          '下载',
+          '请使用上方PDF查看器工具栏中的下载按钮。'
         );
       }
     }
   } catch (e) {
     console.error('Failed to trigger download:', e);
     showAlert(
-      'Download',
-      'Cannot access viewer controls. Please use the Download button in the PDF viewer toolbar above.'
+      '下载',
+      '无法访问查看器控件。请使用上方PDF查看器工具栏中的下载按钮。'
     );
   }
 }

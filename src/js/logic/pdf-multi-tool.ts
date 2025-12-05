@@ -120,7 +120,7 @@ function showLoading(current: number, total: number) {
   loader.classList.remove('hidden');
   const percentage = Math.round((current / total) * 100);
   progress.style.width = `${percentage}%`;
-  text.textContent = `Rendering pages...`;
+  text.textContent = `正在渲染页面...`;
 }
 
 async function withButtonLoading(
@@ -182,8 +182,8 @@ function initializeTool() {
     console.log('Upload button clicked, isRendering:', isRendering);
     if (isRendering) {
       showModal(
-        'Please Wait',
-        'Pages are still being rendered. Please wait...',
+        '请稍候',
+        '页面仍在渲染中。请稍候...',
         'info'
       );
       return;
@@ -233,8 +233,8 @@ function initializeTool() {
       if (isRendering) return;
       if (selectedPages.size === 0) {
         showModal(
-          'No Pages Selected',
-          'Please select at least one page to download.',
+          '未选择页面',
+          '请至少选择一个页面进行下载。',
           'info'
         );
         return;
@@ -262,7 +262,7 @@ function initializeTool() {
   document.getElementById('export-pdf-btn')?.addEventListener('click', () => {
     if (isRendering) return;
     if (allPages.length === 0) {
-      showModal('No Pages', 'There are no pages to export.', 'info');
+      showModal('无页面', '没有可导出的页面。', 'info');
       return;
     }
     withButtonLoading('export-pdf-btn', async () => {
@@ -380,8 +380,8 @@ async function handlePdfUpload(e: Event) {
 async function loadPdfs(files: File[]) {
   if (isRendering) {
     showModal(
-      'Please Wait',
-      'Pages are still being rendered. Please wait...',
+      '请稍候',
+      '页面仍在渲染中。请稍候...',
       'info'
     );
     return;
@@ -412,7 +412,7 @@ async function loadPdfs(files: File[]) {
           console.log(`Repairing ${file.name}...`);
           const loadingText = document.getElementById('loading-text');
           if (loadingText)
-            loadingText.textContent = `Repairing ${file.name}...`;
+            loadingText.textContent = `正在修复 ${file.name}...`;
 
           const repairedData = await repairPdfFile(file);
           if (repairedData) {
@@ -489,8 +489,8 @@ async function loadPdfs(files: File[]) {
       } catch (e) {
         console.error(`Failed to load PDF ${file.name}:`, e);
         showModal(
-          'Error',
-          `Failed to load ${file.name}. The file may be corrupted.`,
+          '错误',
+          `无法加载 ${file.name}。文件可能已损坏。`,
           'error'
         );
       }
@@ -577,7 +577,7 @@ function createPageElement(
       'flex flex-col items-center justify-center text-gray-400';
     loading.innerHTML = `
       <i data-lucide="loader" class="w-8 h-8 animate-spin mb-2"></i>
-      <span class="text-xs">Loading...</span>
+      <span class="text-xs">加载中...</span>
     `;
     preview.appendChild(loading);
     preview.classList.add('bg-gray-700'); // Darker background for loading
@@ -633,7 +633,7 @@ function createPageElement(
   duplicateBtn.className = 'p-1 rounded hover:bg-gray-700';
   duplicateBtn.innerHTML =
     '<i data-lucide="copy" class="w-4 h-4 text-gray-300"></i>';
-  duplicateBtn.title = 'Duplicate this page';
+  duplicateBtn.title = '复制此页面';
   duplicateBtn.onclick = (e) => {
     e.stopPropagation();
     snapshot();
@@ -645,7 +645,7 @@ function createPageElement(
   deleteBtn.className = 'p-1 rounded hover:bg-gray-700';
   deleteBtn.innerHTML =
     '<i data-lucide="trash-2" class="w-4 h-4 text-red-400"></i>';
-  deleteBtn.title = 'Delete this page';
+  deleteBtn.title = '删除此页面';
   deleteBtn.onclick = (e) => {
     e.stopPropagation();
     snapshot();
@@ -657,7 +657,7 @@ function createPageElement(
   insertBtn.className = 'p-1 rounded hover:bg-gray-700';
   insertBtn.innerHTML =
     '<i data-lucide="file-plus" class="w-4 h-4 text-gray-300"></i>';
-  insertBtn.title = 'Insert PDF after this page';
+  insertBtn.title = '在此页面后插入PDF';
   insertBtn.onclick = (e) => {
     e.stopPropagation();
     snapshot();
@@ -669,7 +669,7 @@ function createPageElement(
   splitBtn.className = 'p-1 rounded hover:bg-gray-700';
   splitBtn.innerHTML =
     '<i data-lucide="scissors" class="w-4 h-4 text-gray-300"></i>';
-  splitBtn.title = 'Toggle split after this page';
+  splitBtn.title = '在此页面后切换拆分';
   splitBtn.onclick = (e) => {
     e.stopPropagation();
     snapshot();
@@ -925,8 +925,8 @@ async function handleInsertPdf(e: Event) {
   } catch (e) {
     console.error('Failed to insert PDF:', e);
     showModal(
-      'Error',
-      'Failed to insert PDF. The file may be corrupted.',
+      '错误',
+      '无法插入PDF。文件可能已损坏。',
       'error'
     );
   }
@@ -985,7 +985,7 @@ function addBlankPage() {
 
 function bulkRotate(delta: number) {
   if (selectedPages.size === 0) {
-    showModal('No Selection', 'Please select pages to rotate.', 'info');
+    showModal('未选择', '请选择要旋转的页面。', 'info');
     return;
   }
 
@@ -1017,7 +1017,7 @@ function bulkRotate(delta: number) {
 
 function bulkDelete() {
   if (selectedPages.size === 0) {
-    showModal('No Selection', 'Please select pages to delete.', 'info');
+    showModal('未选择', '请选择要删除的页面。', 'info');
     return;
   }
   const indices = Array.from(selectedPages).sort((a, b) => b - a);
@@ -1034,7 +1034,7 @@ function bulkDelete() {
 
 function bulkDuplicate() {
   if (selectedPages.size === 0) {
-    showModal('No Selection', 'Please select pages to duplicate.', 'info');
+    showModal('未选择', '请选择要复制的页面。', 'info');
     return;
   }
   const indices = Array.from(selectedPages).sort((a, b) => b - a);
@@ -1048,8 +1048,8 @@ function bulkDuplicate() {
 function bulkSplit() {
   if (selectedPages.size === 0) {
     showModal(
-      'No Selection',
-      'Please select pages to mark for splitting.',
+      '未选择',
+      '请选择要标记拆分的页面。',
       'info'
     );
     return;
@@ -1067,7 +1067,7 @@ function bulkSplit() {
 
 async function downloadAll() {
   if (allPages.length === 0) {
-    showModal('No Pages', 'Please upload PDFs first.', 'info');
+    showModal('无页面', '请先上传PDF文件。', 'info');
     return;
   }
 
@@ -1141,13 +1141,13 @@ async function downloadSplitPdfs() {
     downloadFile(zipBlob, 'split-documents.zip');
 
     showModal(
-      'Success',
-      `Downloaded ${segments.length} PDF files in a ZIP archive.`,
+      '成功',
+      `已下载 ${segments.length} 个PDF文件到ZIP压缩包中。`,
       'success'
     );
   } catch (e) {
     console.error('Failed to create split PDFs:', e);
-    showModal('Error', 'Failed to create split PDFs.', 'error');
+    showModal('错误', '无法创建拆分的PDF文件。', 'error');
   } finally {
     hideLoading(); // Ensure loader is hidden if we used it (though showModal replaces it)
   }
@@ -1185,10 +1185,10 @@ async function downloadPagesAsPdf(indices: number[], filename: string) {
     });
 
     downloadFile(blob, filename);
-    showModal('Success', 'PDF downloaded successfully.', 'success');
+    showModal('成功', 'PDF已成功下载。', 'success');
   } catch (e) {
     console.error('Failed to create PDF:', e);
-    showModal('Error', 'Failed to create PDF.', 'error');
+    showModal('错误', '无法创建PDF文件。', 'error');
   }
 }
 
@@ -1227,7 +1227,7 @@ function updatePageDisplay() {
       const info = card.querySelector(
         '.text-xs.text-gray-400.text-center.mb-2'
       );
-      if (info) info.textContent = `Page ${index + 1} `;
+      if (info) info.textContent = `第 ${index + 1} 页`;
 
       // Update selection state
       const selectBtn = card.querySelector(

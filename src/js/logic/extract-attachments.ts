@@ -68,7 +68,7 @@ worker.onmessage = (e: MessageEvent<ExtractAttachmentResponse>) => {
     const attachments = e.data.attachments;
 
     if (attachments.length === 0) {
-      showAlert('No Attachments', 'The PDF file(s) do not contain any attachments to extract.');
+      showAlert('无附件', 'PDF文件中不包含任何可提取的附件。');
 
       state.files = [];
       state.pdfDoc = null;

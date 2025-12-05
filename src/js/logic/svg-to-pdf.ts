@@ -59,8 +59,8 @@ export async function svgToPdf() {
   } catch (e) {
     console.error(e);
     showAlert(
-      'Error',
-      'Failed to convert SVG to PDF. One of the files may be invalid.'
+      '错误',
+      '无法将SVG转换为PDF。其中一个文件可能无效。'
     );
   } finally {
     hideLoader();

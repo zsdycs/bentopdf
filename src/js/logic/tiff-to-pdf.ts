@@ -86,8 +86,8 @@ export async function tiffToPdf() {
   } catch (e) {
     console.error(e);
     showAlert(
-      'Error',
-      'Failed to convert TIFF to PDF. One of the files may be invalid or corrupted.'
+      '错误',
+      '无法将TIFF转换为PDF。其中一个文件可能无效或已损坏。'
     );
   } finally {
     hideLoader();

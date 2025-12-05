@@ -314,7 +314,7 @@ const init = () => {
   ];
 
   if (githubStarsElements.some(el => el) && !__SIMPLE_MODE__) {
-    fetch('https://api.github.com/repos/alam00000/bentopdf')
+    fetch('https://api.github.com/repos/zsdycs/bentopdf')
       .then((response) => response.json())
       .then((data) => {
         if (data.stargazers_count !== undefined) {

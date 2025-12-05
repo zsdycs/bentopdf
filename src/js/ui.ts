@@ -31,9 +31,6 @@ export const dom = {
   alertTitle: document.getElementById('alert-title'),
   alertMessage: document.getElementById('alert-message'),
   alertOkBtn: document.getElementById('alert-ok'),
-  heroSection: document.getElementById('hero-section'),
-  featuresSection: document.getElementById('features-section'),
-  toolsHeader: document.getElementById('tools-header'),
   dividers: document.querySelectorAll('.section-divider'),
   hideSections: document.querySelectorAll('.hide-section'),
   shortcutsModal: document.getElementById('shortcuts-modal'),
@@ -91,9 +88,6 @@ export const switchView = (view: any) => {
     dom.gridView.classList.remove('hidden');
     dom.toolInterface.classList.add('hidden');
     // show hero and features and header
-    dom.heroSection.classList.remove('hidden');
-    dom.featuresSection.classList.remove('hidden');
-    dom.toolsHeader.classList.remove('hidden');
     // show dividers
     dom.dividers.forEach((divider) => {
       divider.classList.remove('hidden');
@@ -107,9 +101,6 @@ export const switchView = (view: any) => {
   } else {
     dom.gridView.classList.add('hidden');
     dom.toolInterface.classList.remove('hidden');
-    dom.featuresSection.classList.add('hidden');
-    dom.heroSection.classList.add('hidden');
-    dom.toolsHeader.classList.add('hidden');
     dom.dividers.forEach((divider) => {
       divider.classList.add('hidden');
     });
@@ -1915,7 +1906,7 @@ export const toolTemplates = {
                                                                                                                                                         `,
 
   cropper: () => `
-                                                                                                                                                        <h2 class="text-2xl font-bold text-white mb-4" > PDF裁剪工具 </h2>
+                                                                                                                                                        <h2 class="text-2xl font-bold text-white mb-4" > 裁剪PDF </h2>
                                                                                                                                                             <p class="mb-6 text-gray-400" > 上传PDF以直观地裁剪一个或多个页面。该工具提供实时预览和两种不同的裁剪模式。</p>
     
     ${createFileInputHTML()}

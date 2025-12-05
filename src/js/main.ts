@@ -40,20 +40,9 @@ const init = () => {
         `;
         document.body.insertBefore(simpleNav, document.body.firstChild);
       }
-
-      const heroSection = document.getElementById('hero-section');
-      if (heroSection) {
-        heroSection.style.display = 'none';
-      }
-
       const githubLink = document.querySelector('a[href*="github.com/alam00000/bentopdf"]');
       if (githubLink) {
         (githubLink as HTMLElement).style.display = 'none';
-      }
-
-      const featuresSection = document.getElementById('features-section');
-      if (featuresSection) {
-        featuresSection.style.display = 'none';
       }
 
       const securitySection = document.getElementById(
@@ -116,20 +105,6 @@ const init = () => {
       });
 
       document.title = 'BentoPDF - PDF工具';
-
-      const toolsHeader = document.getElementById('tools-header');
-      if (toolsHeader) {
-        const title = toolsHeader.querySelector('h2');
-        const subtitle = toolsHeader.querySelector('p');
-        if (title) {
-          title.textContent = 'PDF工具';
-          title.className = 'text-4xl md:text-5xl font-bold text-white mb-3';
-        }
-        if (subtitle) {
-          subtitle.textContent = '选择一个工具开始使用';
-          subtitle.className = 'text-lg text-gray-400';
-        }
-      }
 
       const app = document.getElementById('app');
       if (app) {

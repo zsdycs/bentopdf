@@ -12,7 +12,7 @@ import { PDFDocument as PDFLibDocument } from 'pdf-lib';
 
 export async function imageToPdf() {
   if (state.files.length === 0) {
-    showAlert('No Files', 'Please select at least one image file.');
+    showAlert('无文件', '请至少选择一个图片文件。');
     return;
   }
 
@@ -56,7 +56,7 @@ export async function imageToPdf() {
         state.files = filesByType[type] as File[];
         await heicToPdf();
       } else {
-        showLoader('Converting images to PDF...');
+        showLoader('正在将图片转换为PDF...');
         try {
 
           const pdfDoc = await PDFLibDocument.create();
@@ -91,7 +91,7 @@ export async function imageToPdf() {
           );
         } catch (e) {
           console.error(e);
-          showAlert('Error', 'Failed to convert images to PDF.');
+          showAlert('错误', '无法将图片转换为PDF。');
         } finally {
           hideLoader();
         }
@@ -102,7 +102,7 @@ export async function imageToPdf() {
     return;
   }
 
-  showLoader('Converting mixed image types to PDF...');
+  showLoader('正在将混合图片类型转换为PDF...');
   try {
     const pdfDoc = await PDFLibDocument.create();
 
@@ -161,7 +161,7 @@ export async function imageToPdf() {
     );
   } catch (e) {
     console.error(e);
-    showAlert('Error', e.message || 'Failed to create PDF from images.');
+    showAlert('错误', e.message || '无法从图片创建PDF。');
   } finally {
     hideLoader();
   }

@@ -34,10 +34,10 @@ async function convertImageToPngBytes(file: any) {
 
 export async function svgToPdf() {
   if (state.files.length === 0) {
-    showAlert('No Files', 'Please select at least one SVG file.');
+    showAlert('无文件', '请至少选择一个SVG文件。');
     return;
   }
-  showLoader('Converting SVG to PDF...');
+  showLoader('正在将SVG转换为PDF...');
   try {
     const pdfDoc = await PDFLibDocument.create();
     for (const file of state.files) {

@@ -52,10 +52,10 @@ function sanitizeImageAsJpeg(imageBytes: any) {
 
 export async function jpgToPdf() {
   if (state.files.length === 0) {
-    showAlert('No Files', 'Please select at least one JPG file.');
+    showAlert('无文件', '请至少选择一个JPG文件。');
     return;
   }
-  showLoader('Creating PDF from JPGs...');
+  showLoader('正在从JPG创建PDF...');
   try {
     const pdfDoc = await PDFLibDocument.create();
 
@@ -100,7 +100,7 @@ export async function jpgToPdf() {
     );
   } catch (e) {
     console.error(e);
-    showAlert('Conversion Error', e.message);
+    showAlert('转换错误', e.message);
   } finally {
     hideLoader();
   }

@@ -10,7 +10,7 @@ async function initializeQpdf() {
   if (qpdfInstance) {
     return qpdfInstance;
   }
-  showLoader('Initializing optimization engine...');
+  showLoader('正在初始化优化引擎...');
   try {
     qpdfInstance = await createModule({
       locateFile: () => '/qpdf.wasm',
@@ -34,7 +34,7 @@ export async function linearizePdf() {
     (file: File) => file.type === 'application/pdf'
   );
   if (!pdfFiles || pdfFiles.length === 0) {
-    showAlert('No PDF Files', 'Please upload at least one PDF file.');
+    showAlert('无PDF文件', '请至少上传一个PDF文件。');
     return;
   }
 
@@ -110,7 +110,7 @@ export async function linearizePdf() {
     if (errorCount > 0) {
       alertMessage += ` ${errorCount} file(s) failed.`;
     }
-    showAlert('Processing Complete', alertMessage);
+    showAlert('处理完成', alertMessage);
   } catch (error: any) {
     console.error('Linearization process error:', error);
     showAlert(

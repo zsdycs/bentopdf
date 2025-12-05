@@ -5,7 +5,7 @@ import { state } from '../state.js';
 import { PDFDocument as PDFLibDocument } from 'pdf-lib';
 
 export async function organize() {
-  showLoader('Saving changes...');
+  showLoader('正在保存更改...');
   try {
     const newPdf = await PDFLibDocument.create();
     const pageContainer = document.getElementById('page-organizer');
@@ -23,7 +23,7 @@ export async function organize() {
     );
   } catch (e) {
     console.error(e);
-    showAlert('Error', 'Could not save the changes.');
+    showAlert('错误', '无法保存更改。');
   } finally {
     hideLoader();
   }

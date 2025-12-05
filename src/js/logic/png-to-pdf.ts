@@ -6,10 +6,10 @@ import { PDFDocument as PDFLibDocument } from 'pdf-lib';
 
 export async function pngToPdf() {
   if (state.files.length === 0) {
-    showAlert('No Files', 'Please select at least one PNG file.');
+    showAlert('无文件', '请至少选择一个PNG文件。');
     return;
   }
-  showLoader('Creating PDF from PNGs...');
+  showLoader('正在从PNG创建PDF...');
   try {
     const pdfDoc = await PDFLibDocument.create();
     for (const file of state.files) {

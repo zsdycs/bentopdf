@@ -66,7 +66,7 @@ export function createPlaceholder(pageNumber: number, fileName?: string): HTMLEl
 
     const loadingText = document.createElement('span');
     loadingText.className = 'text-gray-500 text-xs';
-    loadingText.textContent = 'Loading...';
+    loadingText.textContent = '加载中...';
 
     skeletonContainer.appendChild(loadingText);
     placeholder.appendChild(skeletonContainer);

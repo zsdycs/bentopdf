@@ -10,13 +10,13 @@ export function flattenFormsInDoc(pdfDoc) {
 
 export async function flatten() {
   if (state.files.length === 0) {
-    showAlert('No Files', 'Please select at least one PDF file.');
+    showAlert('无文件', '请至少选择一个PDF文件。');
     return;
   }
 
   try {
     if (state.files.length === 1) {
-      showLoader('Flattening PDF...');
+      showLoader('正在拼合PDF...');
       const file = state.files[0];
       const arrayBuffer = await readFileAsArrayBuffer(file);
       const pdfDoc = await PDFDocument.load(arrayBuffer as ArrayBuffer, { ignoreEncryption: true });
@@ -38,14 +38,14 @@ export async function flatten() {
       );
       hideLoader();
     } else {
-      showLoader('Flattening multiple PDFs...');
+      showLoader('正在拼合多个PDF...');
       const JSZip = (await import('jszip')).default;
       const zip = new JSZip();
       let processedCount = 0;
 
       for (let i = 0; i < state.files.length; i++) {
         const file = state.files[i];
-        showLoader(`Flattening ${i + 1}/${state.files.length}: ${file.name}...`);
+        showLoader(`正在拼合 ${i + 1}/${state.files.length}：${file.name}...`);
 
         try {
           const arrayBuffer = await readFileAsArrayBuffer(file);
@@ -72,15 +72,15 @@ export async function flatten() {
       if (processedCount > 0) {
         const zipBlob = await zip.generateAsync({ type: 'blob' });
         downloadFile(zipBlob, 'flattened_pdfs.zip');
-        showAlert('Success', `Processed ${processedCount} PDFs.`);
+        showAlert('成功', `处理了 ${processedCount} 个PDF。`);
       } else {
-        showAlert('Error', 'No PDFs could be processed.');
+        showAlert('错误', '无法处理任何PDF。');
       }
       hideLoader();
     }
   } catch (e) {
     console.error(e);
     hideLoader();
-    showAlert('Error', e.message || 'An unexpected error occurred.');
+    showAlert('错误', e.message || '发生意外错误。');
   }
 }

@@ -194,7 +194,7 @@ async function renderPageMergeThumbnails() {
         initializePageThumbnailsSortable();
     } catch (error) {
         console.error('Error rendering page thumbnails:', error);
-        showAlert('Error', 'Failed to render page thumbnails');
+        showAlert('错误', '无法渲染页面缩略图');
     } finally {
         hideLoader();
         mergeState.isRendering = false;
@@ -345,7 +345,7 @@ export async function merge() {
         }
 
         if (jobs.length === 0) {
-            showAlert('Error', 'No files or pages selected to merge.');
+            showAlert('错误', '没有选择要合并的文件或页面。');
             hideLoader();
             return;
         }
@@ -373,26 +373,26 @@ export async function merge() {
                 const blob = new Blob([e.data.pdfBytes], { type: 'application/pdf' });
                 downloadFile(blob, 'merged.pdf');
                 mergeState.mergeSuccess = true;
-                showAlert('Success', 'PDFs merged successfully!', 'success', async () => {
+                showAlert('成功', 'PDF合并成功！', 'success', async () => {
                     await resetState();
                 });
             } else {
                 console.error('Worker merge error:', e.data.message);
-                showAlert('Error', e.data.message || 'Failed to merge PDFs.');
+                showAlert('错误', e.data.message || '合并PDF失败。');
             }
         };
 
         mergeWorker.onerror = (e) => {
             hideLoader();
             console.error('Worker error:', e);
-            showAlert('Error', 'An unexpected error occurred in the merge worker.');
+            showAlert('错误', '合并工作器发生意外错误。');
         };
 
     } catch (e) {
         console.error('Merge error:', e);
         showAlert(
-            'Error',
-            'Failed to merge PDFs. Please check that all files are valid and not password-protected.'
+            '错误',
+            '合并PDF失败。请检查所有文件是否有效且未受密码保护。'
         );
         hideLoader();
     }
@@ -405,7 +405,7 @@ export async function refreshMergeUI() {
 
     const wasInPageMode = mergeState.activeMode === 'page';
 
-    showLoader('Loading PDF documents...');
+    showLoader('正在加载PDF文档...');
     try {
         mergeState.pdfDocs = {};
         mergeState.pdfBytes = {};
@@ -420,7 +420,7 @@ export async function refreshMergeUI() {
         }
     } catch (error) {
         console.error('Error loading PDFs:', error);
-        showAlert('Error', 'Failed to load one or more PDF files');
+        showAlert('错误', '无法加载一个或多个PDF文件');
         return;
     } finally {
         hideLoader();

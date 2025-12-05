@@ -8,7 +8,7 @@ pdfjsLib.GlobalWorkerOptions.workerSrc = new URL('pdfjs-dist/build/pdf.worker.mi
 
 
 export async function pdfToPng() {
-  showLoader('Converting to PNG...');
+  showLoader('正在转换为PNG...');
   try {
     const pdf = await getPDFDocument(
       await readFileAsArrayBuffer(state.files[0])
@@ -35,7 +35,7 @@ export async function pdfToPng() {
     downloadFile(zipBlob, 'converted_pngs.zip');
   } catch (e) {
     console.error(e);
-    showAlert('Error', 'Failed to convert PDF to PNG.');
+    showAlert('错误', '将PDF转换为PNG失败。');
   } finally {
     hideLoader();
   }

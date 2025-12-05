@@ -364,7 +364,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
         try {
             if (state.files.length === 0) {
-                showAlert('No Files', 'Please select at least one PDF file.');
+                showAlert('无文件', '请至少选择一个PDF文件。');
                 hideLoader();
                 return;
             }
@@ -377,15 +377,15 @@ document.addEventListener('DOMContentLoaded', () => {
                 let usedMethod;
 
                 if (algorithm === 'vector') {
-                    showLoader('Running Vector (Smart) compression...');
+                    showLoader('正在运行矢量（智能）压缩...');
                     resultBytes = await performSmartCompression(arrayBuffer, smartSettings);
-                    usedMethod = 'Vector';
+                    usedMethod = '矢量';
                 } else if (algorithm === 'photon') {
-                    showLoader('Running Photon (Rasterize) compression...');
+                    showLoader('正在运行光子（光栅化）压缩...');
                     resultBytes = await performLegacyCompression(arrayBuffer, legacySettings);
-                    usedMethod = 'Photon';
+                    usedMethod = '光子';
                 } else {
-                    showLoader('Running Automatic (Vector first)...');
+                    showLoader('正在运行自动（矢量优先）...');
                     const vectorResultBytes = await performSmartCompression(
                         arrayBuffer,
                         smartSettings
@@ -395,13 +395,13 @@ document.addEventListener('DOMContentLoaded', () => {
                         resultBytes = vectorResultBytes;
                         usedMethod = 'Vector (Automatic)';
                     } else {
-                        showAlert('Vector failed to reduce size. Trying Photon...', 'info');
-                        showLoader('Running Automatic (Photon fallback)...');
+                        showAlert('矢量压缩未能减小文件大小。正在尝试光子压缩...', 'info');
+                        showLoader('正在运行自动（光子备用）...');
                         resultBytes = await performLegacyCompression(
                             arrayBuffer,
                             legacySettings
                         );
-                        usedMethod = 'Photon (Automatic)';
+                        usedMethod = '光子（自动）';
                     }
                 }
 
@@ -420,21 +420,21 @@ document.addEventListener('DOMContentLoaded', () => {
 
                 if (savings > 0) {
                     showAlert(
-                        'Compression Complete',
-                        `Method: ${usedMethod}. File size reduced from ${originalSize} to ${compressedSize} (Saved ${savingsPercent}%).`,
+                        '压缩完成',
+                        `方法：${usedMethod}。文件大小从 ${originalSize} 减少到 ${compressedSize}（节省 ${savingsPercent}%）。`,
                         'success',
                         () => resetState()
                     );
                 } else {
                     showAlert(
-                        'Compression Finished',
-                        `Method: ${usedMethod}. Could not reduce file size. Original: ${originalSize}, New: ${compressedSize}.`,
+                        '压缩完成',
+                        `方法：${usedMethod}。未能减小文件大小。原始：${originalSize}，新的：${compressedSize}。`,
                         'warning',
                         () => resetState()
                     );
                 }
             } else {
-                showLoader('Compressing multiple PDFs...');
+                showLoader('正在压缩多个PDF...');
                 const JSZip = (await import('jszip')).default;
                 const zip = new JSZip();
                 let totalOriginalSize = 0;
@@ -442,7 +442,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
                 for (let i = 0; i < state.files.length; i++) {
                     const file = state.files[i];
-                    showLoader(`Compressing ${i + 1}/${state.files.length}: ${file.name}...`);
+                    showLoader(`正在压缩 ${i + 1}/${state.files.length}：${file.name}...`);
                     const arrayBuffer = await readFileAsArrayBuffer(file);
                     totalOriginalSize += file.size;
 
@@ -479,15 +479,15 @@ document.addEventListener('DOMContentLoaded', () => {
 
                 if (totalSavings > 0) {
                     showAlert(
-                        'Compression Complete',
-                        `Compressed ${state.files.length} PDF(s). Total size reduced from ${formatBytes(totalOriginalSize)} to ${formatBytes(totalCompressedSize)} (Saved ${totalSavingsPercent}%).`,
+                        '压缩完成',
+                        `已压缩 ${state.files.length} 个PDF。总大小从 ${formatBytes(totalOriginalSize)} 减少到 ${formatBytes(totalCompressedSize)}（节省 ${totalSavingsPercent}%）。`,
                         'success',
                         () => resetState()
                     );
                 } else {
                     showAlert(
-                        'Compression Finished',
-                        `Compressed ${state.files.length} PDF(s). Total size: ${formatBytes(totalCompressedSize)}.`,
+                        '压缩完成',
+                        `已压缩 ${state.files.length} 个PDF。总大小：${formatBytes(totalCompressedSize)}。`,
                         'info',
                         () => resetState()
                     );
@@ -496,8 +496,8 @@ document.addEventListener('DOMContentLoaded', () => {
         } catch (e: any) {
             hideLoader();
             showAlert(
-                'Error',
-                `An error occurred during compression. Error: ${e.message}`
+                '错误',
+                `压缩过程中发生错误。错误：${e.message}`
             );
         }
     };

@@ -8,11 +8,11 @@ import { PDFName } from 'pdf-lib';
 
 export async function sanitizePdf() {
   if (!state.pdfDoc) {
-    showAlert('Error', 'No PDF document loaded.');
+    showAlert('错误', '未加载PDF文档。');
     return;
   }
 
-  showLoader('Sanitizing PDF...');
+  showLoader('正在清理PDF...');
   try {
     const pdfDoc = state.pdfDoc;
 
@@ -577,10 +577,10 @@ export async function sanitizePdf() {
       new Blob([sanitizedPdfBytes], { type: 'application/pdf' }),
       'sanitized.pdf'
     );
-    showAlert('Success', 'PDF has been sanitized and downloaded.');
+    showAlert('成功', 'PDF已清理并下载。');
   } catch (e) {
     console.error('Sanitization Error:', e);
-    showAlert('Error', `An error occurred during sanitization: ${e.message}`);
+    showAlert('错误', `清理过程中发生错误：${e.message}`);
   } finally {
     hideLoader();
   }

@@ -338,7 +338,7 @@ export async function txtToPdf() {
   const uploadPanel = document.getElementById('txt-upload-panel');
   const isUploadMode = !uploadPanel?.classList.contains('hidden');
 
-  showLoader('Creating PDF...');
+  showLoader('正在创建PDF...');
   try {
     const selectedLanguages: string[] = [];
     const langContainer = document.getElementById('language-list-container');
@@ -382,7 +382,7 @@ export async function txtToPdf() {
           `${baseName}.pdf`
         );
       } else {
-        showLoader('Creating PDFs and ZIP archive...');
+        showLoader('正在创建PDF和ZIP存档...');
         const zip = new JSZip();
 
         for (const file of state.files) {
@@ -407,7 +407,7 @@ export async function txtToPdf() {
     } else {
       const text = ((document.getElementById('text-input') as HTMLTextAreaElement)?.value || '').normalize('NFC');
       if (!text.trim()) {
-        showAlert('Input Required', 'Please enter some text to convert.');
+        showAlert('需要输入', '请输入一些要转换的文本。');
         hideLoader();
         return;
       }
@@ -429,7 +429,7 @@ export async function txtToPdf() {
     }
   } catch (e) {
     console.error(e);
-    showAlert('Error', 'Failed to create PDF from text.');
+    showAlert('错误', '从文本创建PDF失败。');
   } finally {
     hideLoader();
   }

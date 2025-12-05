@@ -60,11 +60,11 @@ async function handleFileUpload(e: Event) {
 async function handleFiles(files: FileList) {
     const file = files[0];
     if (!file || file.type !== 'application/pdf') {
-        showAlert('Invalid File', 'Please upload a valid PDF file.');
+        showAlert('无效文件', '请上传有效的PDF文件。');
         return;
     }
 
-    showLoader('Loading PDF Editor...');
+    showLoader('正在加载PDF编辑器...');
 
     try {
         const pdfWrapper = document.getElementById('embed-pdf-wrapper');
@@ -120,7 +120,7 @@ async function handleFiles(files: FileList) {
 
     } catch (error) {
         console.error('Error loading PDF Editor:', error);
-        showAlert('Error', 'Failed to load the PDF Editor.');
+        showAlert('错误', '无法加载PDF编辑器。');
     } finally {
         hideLoader();
     }

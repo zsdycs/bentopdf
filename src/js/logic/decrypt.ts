@@ -13,7 +13,7 @@ export async function decrypt() {
   )?.value;
 
   if (!password) {
-    showAlert('Input Required', 'Please enter the PDF password.');
+    showAlert('需要输入', '请输入PDF密码。');
     return;
   }
 
@@ -22,16 +22,16 @@ export async function decrypt() {
   let qpdf: any;
 
   try {
-    showLoader('Initializing decryption...');
+    showLoader('正在初始化解密...');
     qpdf = await initializeQpdf();
 
-    showLoader('Reading encrypted PDF...');
+    showLoader('正在读取加密的PDF...');
     const fileBuffer = await readFileAsArrayBuffer(file);
     const uint8Array = new Uint8Array(fileBuffer as ArrayBuffer);
 
     qpdf.FS.writeFile(inputPath, uint8Array);
 
-    showLoader('Decrypting PDF...');
+    showLoader('正在解密PDF...');
 
     const args = [inputPath, '--password=' + password, '--decrypt', outputPath];
 
@@ -49,11 +49,11 @@ export async function decrypt() {
       throw qpdfError;
     }
 
-    showLoader('Preparing download...');
+    showLoader('正在准备下载...');
     const outputFile = qpdf.FS.readFile(outputPath, { encoding: 'binary' });
 
     if (outputFile.length === 0) {
-      throw new Error('Decryption resulted in an empty file.');
+      throw new Error('解密结果为空文件。');
     }
 
     const blob = new Blob([outputFile], { type: 'application/pdf' });
@@ -61,8 +61,8 @@ export async function decrypt() {
 
     hideLoader();
     showAlert(
-      'Success',
-      'PDF decrypted successfully! Your download has started.'
+      '成功',
+      'PDF解密成功！已开始下载。'
     );
   } catch (error: any) {
     console.error('Error during PDF decryption:', error);
@@ -70,18 +70,18 @@ export async function decrypt() {
 
     if (error.message === 'INVALID_PASSWORD') {
       showAlert(
-        'Incorrect Password',
-        'The password you entered is incorrect. Please try again.'
+        '密码错误',
+        '您输入的密码不正确。请重试。'
       );
     } else if (error.message?.includes('password')) {
       showAlert(
-        'Password Error',
-        'Unable to decrypt the PDF with the provided password.'
+        '密码错误',
+        '无法使用提供的密码解密PDF。'
       );
     } else {
       showAlert(
-        'Decryption Failed',
-        `An error occurred: ${error.message || 'The password you entered is wrong or the file is corrupted.'}`
+        '解密失败',
+        `发生错误：${error.message || '您输入的密码错误或文件已损坏。'}`
       );
     }
   } finally {

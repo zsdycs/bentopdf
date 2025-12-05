@@ -10,10 +10,10 @@ export async function reversePages() {
     (file: File) => file.type === 'application/pdf'
   );
   if (!pdfDocs.length) {
-    showAlert('Error', 'PDF not loaded.');
+    showAlert('错误', 'PDF未加载。');
     return;
   }
-  showLoader('Reversing page order...');
+  showLoader('正在反转页面顺序...');
   try {
     const zip = new JSZip();
     for (let j = 0; j < pdfDocs.length; j++) {
@@ -39,7 +39,7 @@ export async function reversePages() {
     downloadFile(zipBlob, 'reversed_pdfs.zip');
   } catch (e) {
     console.error(e);
-    showAlert('Error', 'Could not reverse the PDF pages.');
+    showAlert('错误', '无法反转PDF页面。');
   } finally {
     hideLoader();
   }

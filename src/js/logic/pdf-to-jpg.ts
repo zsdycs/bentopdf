@@ -8,7 +8,7 @@ pdfjsLib.GlobalWorkerOptions.workerSrc = new URL('pdfjs-dist/build/pdf.worker.mi
 
 
 export async function pdfToJpg() {
-  showLoader('Converting to JPG...');
+  showLoader('正在转换为JPG...');
   try {
     const pdf = await getPDFDocument(
       await readFileAsArrayBuffer(state.files[0])

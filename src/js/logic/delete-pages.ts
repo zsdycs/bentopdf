@@ -8,10 +8,10 @@ export async function deletePages() {
   // @ts-expect-error TS(2339) FIXME: Property 'value' does not exist on type 'HTMLEleme... Remove this comment to see the full error message
   const pageInput = document.getElementById('pages-to-delete').value;
   if (!pageInput) {
-    showAlert('Invalid Input', 'Please enter page numbers to delete.');
+    showAlert('无效输入', '请输入要删除的页码。');
     return;
   }
-  showLoader('Deleting pages...');
+  showLoader('正在删除页面...');
   try {
     const totalPages = state.pdfDoc.getPageCount();
     const indicesToDelete = new Set();
@@ -38,12 +38,12 @@ export async function deletePages() {
     }
 
     if (indicesToDelete.size === 0) {
-      showAlert('Invalid Input', 'No valid pages selected for deletion.');
+      showAlert('无效输入', '没有选择有效的要删除的页面。');
       hideLoader();
       return;
     }
     if (indicesToDelete.size >= totalPages) {
-      showAlert('Invalid Input', 'You cannot delete all pages.');
+      showAlert('无效输入', '您不能删除所有页面。');
       hideLoader();
       return;
     }
@@ -63,7 +63,7 @@ export async function deletePages() {
     );
   } catch (e) {
     console.error(e);
-    showAlert('Error', 'Could not delete pages.');
+    showAlert('错误', '无法删除页面。');
   } finally {
     hideLoader();
   }

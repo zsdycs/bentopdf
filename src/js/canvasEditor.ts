@@ -56,7 +56,7 @@ function calculateFitScale(page: any) {
  */
 async function renderPage(num: any) {
   editorState.pageRendering = true;
-  showLoader(`Loading page ${num}...`);
+  showLoader(`正在加载第 ${num} 页...`);
 
   try {
     const page = await editorState.pdf.getPage(num);
@@ -85,7 +85,7 @@ async function renderPage(num: any) {
     redrawShapes();
   } catch (error) {
     console.error('Error rendering page:', error);
-    showAlert('Render Error', 'Could not display the page.');
+    showAlert('渲染错误', '无法显示页面。');
   } finally {
     editorState.pageRendering = false;
     hideLoader();
@@ -226,9 +226,9 @@ export async function setupCanvasEditor(toolId: any) {
   currentPageDisplay.textContent = '1';
 
   pageInfo.append(
-    'Page ',
+    '第 ',
     currentPageDisplay,
-    ` of ${editorState.pdf.numPages}`
+    ` 页，共 ${editorState.pdf.numPages} 页`
   );
 
   const nextButton = document.createElement('button');
@@ -301,8 +301,8 @@ export async function setupCanvasEditor(toolId: any) {
     document.getElementById('process-btn').onclick = async () => {
       if (Object.keys(editorState.cropBoxes).length === 0) {
         showAlert(
-          'No Area Selected',
-          'Please draw a rectangle on at least one page to select the crop area.'
+          '未选择区域',
+          '请在至少一页上绘制矩形以选择裁剪区域。'
         );
         return;
       }
@@ -311,8 +311,8 @@ export async function setupCanvasEditor(toolId: any) {
       );
       if (success) {
         showAlert(
-          'Success!',
-          'Your PDF has been cropped and the download has started.'
+          '成功！',
+          'PDF已裁剪完成，下载已开始。'
         );
       }
     };

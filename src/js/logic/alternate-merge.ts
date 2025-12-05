@@ -32,7 +32,7 @@ export async function setupAlternateMergeTool() {
   alternateMergeState.pdfDocs = {};
   alternateMergeState.pdfBytes = {};
 
-  showLoader('Loading PDF documents...');
+  showLoader('正在加载PDF文档...');
   try {
     for (const file of state.files) {
       const pdfBytes = await readFileAsArrayBuffer(file);
@@ -76,8 +76,8 @@ export async function setupAlternateMergeTool() {
     });
   } catch (error) {
     showAlert(
-      'Error',
-      'Failed to load one or more PDF files. They may be corrupted or password-protected.'
+      '错误',
+      '无法加载一个或多个PDF文件。它们可能已损坏或受密码保护。'
     );
     console.error(error);
   } finally {
@@ -88,13 +88,13 @@ export async function setupAlternateMergeTool() {
 export async function alternateMerge() {
   if (Object.keys(alternateMergeState.pdfBytes).length < 2) {
     showAlert(
-      'Not Enough Files',
-      'Please upload at least two PDF files to alternate and mix.'
+      '文件不足',
+      '请至少上传两个PDF文件以交替混合。'
     );
     return;
   }
 
-  showLoader('Alternating and mixing pages...');
+  showLoader('正在交替混合页面...');
   try {
     const fileList = document.getElementById('alternate-file-list');
     if (!fileList) throw new Error('File list not found');
@@ -112,7 +112,7 @@ export async function alternateMerge() {
     }
 
     if (filesToMerge.length < 2) {
-      showAlert('Error', 'At least two valid PDFs are required.');
+      showAlert('错误', '至少需要两个有效的PDF。');
       hideLoader();
       return;
     }
@@ -129,22 +129,22 @@ export async function alternateMerge() {
       if (e.data.status === 'success') {
         const blob = new Blob([e.data.pdfBytes], { type: 'application/pdf' });
         downloadFile(blob, 'alternated-mixed.pdf');
-        showAlert('Success', 'PDFs have been mixed successfully!');
+        showAlert('成功', 'PDF文件已成功混合！');
       } else {
         console.error('Worker interleave error:', e.data.message);
-        showAlert('Error', e.data.message || 'Failed to interleave PDFs.');
+        showAlert('错误', e.data.message || '交错PDF失败。');
       }
     };
 
     alternateMergeWorker.onerror = (e) => {
       hideLoader();
       console.error('Worker error:', e);
-      showAlert('Error', 'An unexpected error occurred in the merge worker.');
+      showAlert('错误', '合并工作器发生意外错误。');
     };
 
   } catch (e) {
     console.error('Alternate Merge error:', e);
-    showAlert('Error', 'An error occurred while mixing the PDFs.');
+    showAlert('错误', '混合PDF时发生错误。');
     hideLoader();
   }
 }

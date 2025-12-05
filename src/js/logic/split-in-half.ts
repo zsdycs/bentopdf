@@ -8,10 +8,10 @@ export async function splitInHalf() {
   // @ts-expect-error TS(2339) FIXME: Property 'value' does not exist on type 'HTMLEleme... Remove this comment to see the full error message
   const splitType = document.getElementById('split-type').value;
   if (!state.pdfDoc) {
-    showAlert('Error', 'No PDF document is loaded.');
+    showAlert('错误', '未加载PDF文档。');
     return;
   }
-  showLoader('Splitting PDF pages...');
+  showLoader('正在拆分PDF页面...');
   try {
     const newPdfDoc = await PDFLibDocument.create();
     const pages = state.pdfDoc.getPages();
@@ -48,7 +48,7 @@ export async function splitInHalf() {
     );
   } catch (e) {
     console.error(e);
-    showAlert('Error', 'An error occurred while splitting the PDF.');
+    showAlert('错误', '拆分PDF时发生错误。');
   } finally {
     hideLoader();
   }

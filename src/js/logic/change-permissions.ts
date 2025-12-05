@@ -23,15 +23,15 @@ export async function changePermissions() {
   let qpdf: any;
 
   try {
-    showLoader('Initializing...');
+    showLoader('正在初始化...');
     qpdf = await initializeQpdf();
 
-    showLoader('Reading PDF...');
+    showLoader('正在读取PDF...');
     const fileBuffer = await readFileAsArrayBuffer(file);
     const uint8Array = new Uint8Array(fileBuffer as ArrayBuffer);
     qpdf.FS.writeFile(inputPath, uint8Array);
 
-    showLoader('Processing PDF permissions...');
+    showLoader('正在处理PDF权限...');
 
     const args = [inputPath];
 
@@ -113,11 +113,11 @@ export async function changePermissions() {
       throw new Error('Processing failed: ' + errorMsg || 'Unknown error');
     }
 
-    showLoader('Preparing download...');
+    showLoader('正在准备下载...');
     const outputFile = qpdf.FS.readFile(outputPath, { encoding: 'binary' });
 
     if (!outputFile || outputFile.length === 0) {
-      throw new Error('Processing resulted in an empty file.');
+      throw new Error('处理结果为空文件。');
     }
 
     const blob = new Blob([outputFile], { type: 'application/pdf' });
@@ -125,31 +125,31 @@ export async function changePermissions() {
 
     hideLoader();
 
-    let successMessage = 'PDF permissions changed successfully!';
+    let successMessage = 'PDF权限修改成功！';
     if (!shouldEncrypt) {
       successMessage =
-        'PDF decrypted successfully! All encryption and restrictions removed.';
+        'PDF解密成功！已移除所有加密和限制。';
     }
 
-    showAlert('Success', successMessage);
+    showAlert('成功', successMessage);
   } catch (error: any) {
     console.error('Error during PDF permission change:', error);
     hideLoader();
 
     if (error.message === 'INVALID_PASSWORD') {
       showAlert(
-        'Incorrect Password',
-        'The current password you entered is incorrect. Please try again.'
+        '密码错误',
+        '您输入的当前密码不正确。请重试。'
       );
     } else if (error.message === 'PASSWORD_REQUIRED') {
       showAlert(
-        'Password Required',
-        'This PDF is password-protected. Please enter the current password to proceed.'
+        '需要密码',
+        '此PDF受密码保护。请输入当前密码以继续。'
       );
     } else {
       showAlert(
-        'Processing Failed',
-        `An error occurred: ${error.message || 'The PDF might be corrupted or password protected.'}`
+        '处理失败',
+        `发生错误：${error.message || 'PDF可能已损坏或受密码保护。'}`
       );
     }
   } finally {

@@ -115,18 +115,18 @@ const init = () => {
         (divider as HTMLElement).style.display = 'none';
       });
 
-      document.title = 'BentoPDF - PDF Tools';
+      document.title = 'BentoPDF - PDF工具';
 
       const toolsHeader = document.getElementById('tools-header');
       if (toolsHeader) {
         const title = toolsHeader.querySelector('h2');
         const subtitle = toolsHeader.querySelector('p');
         if (title) {
-          title.textContent = 'PDF Tools';
+          title.textContent = 'PDF工具';
           title.className = 'text-4xl md:text-5xl font-bold text-white mb-3';
         }
         if (subtitle) {
-          subtitle.textContent = 'Select a tool to get started';
+          subtitle.textContent = '选择一个工具开始使用';
           subtitle.className = 'text-lg text-gray-400';
         }
       }
@@ -438,8 +438,8 @@ const init = () => {
   if (dom.resetShortcutsBtn) {
     dom.resetShortcutsBtn.addEventListener('click', async () => {
       const confirmed = await showWarningModal(
-        'Reset Shortcuts',
-        'Are you sure you want to reset all shortcuts to default?<br><br>This action cannot be undone.',
+        '重置快捷键',
+        '确定要将所有快捷键重置为默认值吗？<br><br>此操作无法撤销。',
         true
       );
 
@@ -470,14 +470,14 @@ const init = () => {
             if (ShortcutsManager.importSettings(content)) {
               renderShortcutsList();
               await showWarningModal(
-                'Import Successful',
-                'Shortcuts imported successfully!',
+                '导入成功',
+                '快捷键导入成功！',
                 false
               );
             } else {
               await showWarningModal(
-                'Import Failed',
-                'Failed to import shortcuts. Invalid file format.',
+                '导入失败',
+                '快捷键导入失败。文件格式无效。',
                 false
               );
             }
@@ -519,22 +519,22 @@ const init = () => {
 
   // Reserved shortcuts that commonly conflict with browser/OS functions
   const RESERVED_SHORTCUTS: Record<string, { mac?: string; windows?: string }> = {
-    'mod+w': { mac: 'Closes tab', windows: 'Closes tab' },
-    'mod+t': { mac: 'Opens new tab', windows: 'Opens new tab' },
-    'mod+n': { mac: 'Opens new window', windows: 'Opens new window' },
-    'mod+shift+n': { mac: 'Opens incognito window', windows: 'Opens incognito window' },
-    'mod+q': { mac: 'Quits application (cannot be overridden)' },
-    'mod+m': { mac: 'Minimizes window' },
-    'mod+h': { mac: 'Hides window' },
-    'mod+r': { mac: 'Reloads page', windows: 'Reloads page' },
-    'mod+shift+r': { mac: 'Hard reloads page', windows: 'Hard reloads page' },
-    'mod+l': { mac: 'Focuses address bar', windows: 'Focuses address bar' },
-    'mod+d': { mac: 'Bookmarks page', windows: 'Bookmarks page' },
-    'mod+shift+t': { mac: 'Reopens closed tab', windows: 'Reopens closed tab' },
-    'mod+shift+w': { mac: 'Closes window', windows: 'Closes window' },
-    'mod+tab': { mac: 'Switches tabs', windows: 'Switches apps' },
-    'alt+f4': { windows: 'Closes window' },
-    'ctrl+tab': { mac: 'Switches tabs', windows: 'Switches tabs' },
+    'mod+w': { mac: '关闭标签页', windows: '关闭标签页' },
+    'mod+t': { mac: '打开新标签页', windows: '打开新标签页' },
+    'mod+n': { mac: '打开新窗口', windows: '打开新窗口' },
+    'mod+shift+n': { mac: '打开隐身窗口', windows: '打开隐身窗口' },
+    'mod+q': { mac: '退出应用程序（无法覆盖）' },
+    'mod+m': { mac: '最小化窗口' },
+    'mod+h': { mac: '隐藏窗口' },
+    'mod+r': { mac: '刷新页面', windows: '刷新页面' },
+    'mod+shift+r': { mac: '强制刷新页面', windows: '强制刷新页面' },
+    'mod+l': { mac: '聚焦地址栏', windows: '聚焦地址栏' },
+    'mod+d': { mac: '添加书签', windows: '添加书签' },
+    'mod+shift+t': { mac: '重新打开已关闭的标签页', windows: '重新打开已关闭的标签页' },
+    'mod+shift+w': { mac: '关闭窗口', windows: '关闭窗口' },
+    'mod+tab': { mac: '切换标签页', windows: '切换应用' },
+    'alt+f4': { windows: '关闭窗口' },
+    'ctrl+tab': { mac: '切换标签页', windows: '切换标签页' },
   };
 
   function getReservedShortcutWarning(combo: string, isMac: boolean): string | null {
@@ -659,7 +659,7 @@ const init = () => {
         const input = document.createElement('input');
         input.type = 'text';
         input.className = 'shortcut-input w-32 bg-gray-800 border border-gray-600 text-white text-center text-sm rounded px-2 py-1 focus:ring-2 focus:ring-indigo-500 focus:border-transparent outline-none transition-all';
-        input.placeholder = 'Click to set';
+        input.placeholder = '点击设置';
         input.value = formatShortcutDisplay(currentShortcut, isMac);
         input.readOnly = true;
 
@@ -734,10 +734,10 @@ const init = () => {
               const displayCombo = formatShortcutDisplay(combo, isMac);
 
               await showWarningModal(
-                'Shortcut Already in Use',
-                `<strong>${displayCombo}</strong> is already assigned to:<br><br>` +
+                '快捷键已被使用',
+                `<strong>${displayCombo}</strong> 已分配给：<br><br>` +
                 `<em>"${existingToolName}"</em><br><br>` +
-                `Please choose a different shortcut.`,
+                `请选择其他快捷键。`,
                 false
               );
 
@@ -752,11 +752,11 @@ const init = () => {
             if (reservedWarning) {
               const displayCombo = formatShortcutDisplay(combo, isMac);
               const shouldProceed = await showWarningModal(
-                'Reserved Shortcut Warning',
-                `<strong>${displayCombo}</strong> is commonly used for:<br><br>` +
+                '保留快捷键警告',
+                `<strong>${displayCombo}</strong> 通常用于：<br><br>` +
                 `"<em>${reservedWarning}</em>"<br><br>` +
-                `This shortcut may not work reliably or might conflict with browser/system behavior.<br><br>` +
-                `Do you want to use it anyway?`
+                `此快捷键可能无法可靠工作或与浏览器/系统行为冲突。<br><br>` +
+                `仍要使用吗？`
               );
 
               if (!shouldProceed) {
@@ -783,7 +783,7 @@ const init = () => {
         };
 
         input.onfocus = () => {
-          input.value = 'Press keys...';
+          input.value = '按下按键...';
           input.classList.add('border-indigo-500', 'text-indigo-400');
         };
 

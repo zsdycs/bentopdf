@@ -37,7 +37,7 @@ async function isPageBlank(page: PDFPageProxy, threshold: number) {
 
 async function analyzePages() {
   if (!state.pdfDoc) return;
-  showLoader('Analyzing for blank pages...');
+  showLoader('正在分析空白页...');
 
   const pdfBytes = await state.pdfDoc.save();
   const pdf = await getPDFDocument({ data: pdfBytes }).promise;
@@ -123,7 +123,7 @@ export async function setupRemoveBlankPagesTool() {
 }
 
 export async function removeBlankPages() {
-  showLoader('Removing blank pages...');
+  showLoader('正在删除空白页...');
   try {
     const sensitivity = parseInt(
       (document.getElementById('sensitivity-slider') as HTMLInputElement).value
@@ -169,7 +169,7 @@ export async function removeBlankPages() {
     );
   } catch (e) {
     console.error(e);
-    showAlert('Error', 'Could not remove blank pages.');
+    showAlert('错误', '无法删除空白页。');
   } finally {
     hideLoader();
   }

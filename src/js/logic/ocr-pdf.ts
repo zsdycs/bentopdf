@@ -171,7 +171,7 @@ async function runOCR() {
       console.error('Font loading failed, falling back to Helvetica', e);
       primaryFont = await newPdfDoc.embedFont(StandardFonts.Helvetica);
       latinFont = primaryFont;
-      showAlert('Font Warning', 'Could not load the specific font for this language. Some characters may not appear correctly.');
+      showAlert('字体警告', '无法为此语言加载特定字体。某些字符可能无法正确显示。');
     }
 
     let fullText = '';

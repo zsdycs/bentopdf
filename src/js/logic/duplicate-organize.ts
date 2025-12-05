@@ -75,8 +75,8 @@ function attachEventListeners(element: any) {
       initializePageGridSortable();
     } else {
       showAlert(
-        'Cannot Delete',
-        'You cannot delete the last page of the document.'
+        '无法删除',
+        '您不能删除文档的最后一页。'
       );
     }
   });
@@ -89,7 +89,7 @@ export async function renderDuplicateOrganizeThumbnails() {
   // Cleanup any previous lazy loading observers
   cleanupLazyRendering();
 
-  showLoader('Rendering page previews...');
+  showLoader('正在渲染页面预览...');
   const pdfData = await state.pdfDoc.save();
   const pdfjsDoc = await getPDFDocument({ data: pdfData }).promise;
 
@@ -157,7 +157,7 @@ export async function renderDuplicateOrganizeThumbnails() {
         useLazyLoading: true,
         lazyLoadMargin: '400px',
         onProgress: (current, total) => {
-          showLoader(`Rendering page previews: ${current}/${total}`);
+          showLoader(`正在渲染页面预览：${current}/${total}`);
         },
         onBatchComplete: () => {
           createIcons({ icons });
@@ -168,14 +168,14 @@ export async function renderDuplicateOrganizeThumbnails() {
     initializePageGridSortable();
   } catch (error) {
     console.error('Error rendering thumbnails:', error);
-    showAlert('Error', 'Failed to render page previews');
+    showAlert('错误', '无法渲染页面预览');
   } finally {
     hideLoader();
   }
 }
 
 export async function processAndSave() {
-  showLoader('Building new PDF...');
+  showLoader('正在构建PDF...');
   try {
     const grid = document.getElementById('page-grid');
     const finalPageElements = grid.querySelectorAll('.page-thumbnail');
@@ -188,7 +188,7 @@ export async function processAndSave() {
     console.log('Original PDF Page Count:', state.pdfDoc?.getPageCount());
 
     if (finalIndices.length === 0) {
-      showAlert('Error', 'No valid pages to save.');
+      showAlert('错误', '没有可保存的有效页面。');
       return;
     }
 
@@ -198,7 +198,7 @@ export async function processAndSave() {
     const invalidIndices = finalIndices.filter(i => i >= totalPages);
     if (invalidIndices.length > 0) {
       console.error('Found invalid indices:', invalidIndices);
-      showAlert('Error', 'Some pages could not be processed. Please try again.');
+      showAlert('错误', '某些页面无法处理。请重试。');
       return;
     }
 
@@ -212,7 +212,7 @@ export async function processAndSave() {
     );
   } catch (e) {
     console.error('Save error:', e);
-    showAlert('Error', 'Failed to save the new PDF. Check console for details.');
+    showAlert('错误', '无法保存新PDF。请查看控制台以获取详细信息。');
   } finally {
     hideLoader();
   }

@@ -24,7 +24,7 @@ async function loadAttachmentsList() {
   allAttachments = [];
 
   try {
-    showLoader('Loading attachments...');
+    showLoader('正在加载附件...');
 
     const file = state.files[0];
     const fileBuffer = await readFileAsArrayBuffer(file);
@@ -39,7 +39,7 @@ async function loadAttachmentsList() {
   } catch (error) {
     console.error('Error loading attachments:', error);
     hideLoader();
-    showAlert('Error', 'Failed to load attachments from PDF.');
+    showAlert('错误', '无法从PDF加载附件。');
   }
 }
 
@@ -64,17 +64,17 @@ worker.onmessage = (e) => {
       `edited-attachments-${data.fileName}`
     );
 
-    showAlert('Success', 'Attachments updated successfully!');
+    showAlert('成功', '附件更新成功！');
   } else if (data.status === 'error') {
     hideLoader();
-    showAlert('Error', data.message || 'Unknown error occurred.');
+    showAlert('错误', data.message || '发生未知错误。');
   }
 };
 
 worker.onerror = (error) => {
   hideLoader();
   console.error('Worker error:', error);
-  showAlert('Error', 'Worker error occurred. Check console for details.');
+  showAlert('错误', '发生Worker错误。请查看控制台以获取详细信息。');
 };
 
 function displayAttachments(attachments) {
@@ -192,11 +192,11 @@ function displayAttachments(attachments) {
 
 export async function editAttachments() {
   if (!state.files || state.files.length === 0) {
-    showAlert('Error', 'No PDF file loaded.');
+    showAlert('错误', '未PDF文件加载。');
     return;
   }
 
-  showLoader('Processing attachments...');
+  showLoader('正在处理附件...');
 
   try {
     const file = state.files[0];
@@ -213,6 +213,6 @@ export async function editAttachments() {
   } catch (error) {
     console.error('Error editing attachments:', error);
     hideLoader();
-    showAlert('Error', 'Failed to edit attachments.');
+    showAlert('错误', '编辑附件失败。');
   }
 }

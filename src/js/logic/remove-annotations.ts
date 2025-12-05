@@ -71,7 +71,7 @@ export function removeAnnotationsFromDoc(
 }
 
 export async function removeAnnotations() {
-  showLoader('Removing annotations...');
+  showLoader('正在移除注释...');
   try {
     const totalPages = state.pdfDoc.getPageCount();
     let targetPageIndices = [];

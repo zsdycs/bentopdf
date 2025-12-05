@@ -84,7 +84,7 @@ function handleFiles(newFiles: FileList) {
     );
 
     if (validFiles.length < newFiles.length) {
-        showAlert('Invalid Files', 'Some files were skipped. Only JPG/JPEG images are allowed.');
+        showAlert('无效文件', '部分文件被跳过。仅允许JPG/JPEG图片。');
     }
 
     if (validFiles.length > 0) {
@@ -188,11 +188,11 @@ function sanitizeImageAsJpeg(imageBytes: any) {
 
 async function convertToPdf() {
     if (files.length === 0) {
-        showAlert('No Files', 'Please select at least one JPG file.');
+        showAlert('无文件', '请至少选择一个JPG文件。');
         return;
     }
 
-    showLoader('Creating PDF from JPGs...');
+    showLoader('正在从JPG创建PDF...');
 
     try {
         const pdfDoc = await PDFLibDocument.create();
@@ -236,12 +236,12 @@ async function convertToPdf() {
             new Blob([new Uint8Array(pdfBytes)], { type: 'application/pdf' }),
             'from_jpgs.pdf'
         );
-        showAlert('Success', 'PDF created successfully!', 'success', () => {
+        showAlert('成功', 'PDF创建成功！', 'success', () => {
             resetState();
         });
     } catch (e: any) {
         console.error(e);
-        showAlert('Conversion Error', e.message);
+        showAlert('转换错误', e.message);
     } finally {
         hideLoader();
     }

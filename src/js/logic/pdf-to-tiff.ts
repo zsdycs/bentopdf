@@ -8,7 +8,7 @@ import * as pdfjsLib from 'pdfjs-dist';
 pdfjsLib.GlobalWorkerOptions.workerSrc = new URL('pdfjs-dist/build/pdf.worker.min.mjs', import.meta.url).toString();
 
 export async function pdfToTiff() {
-  showLoader('Converting PDF to TIFF...');
+  showLoader('正在将PDF转换为TIFF...');
   try {
     const pdf = await getPDFDocument(
       await readFileAsArrayBuffer(state.files[0])

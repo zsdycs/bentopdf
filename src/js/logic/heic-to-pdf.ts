@@ -6,10 +6,10 @@ import { PDFDocument as PDFLibDocument } from 'pdf-lib';
 
 export async function heicToPdf() {
   if (state.files.length === 0) {
-    showAlert('No Files', 'Please select at least one HEIC file.');
+    showAlert('无文件', '请至少选择一个HEIC文件。');
     return;
   }
-  showLoader('Converting HEIC to PDF...');
+  showLoader('正在将HEIC转换为PDF...');
   try {
     const pdfDoc = await PDFLibDocument.create();
     for (const file of state.files) {

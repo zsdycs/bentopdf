@@ -84,7 +84,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 // Load PDF Document
                 try {
                     if (!state.pdfDoc) {
-                        showLoader('Loading PDF...');
+                        showLoader('正在加载PDF...');
                         const arrayBuffer = await readFileAsArrayBuffer(file) as ArrayBuffer;
                         state.pdfDoc = await PDFLibDocument.load(arrayBuffer);
                         hideLoader();
@@ -93,7 +93,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     pagesSpan.textContent = `${state.pdfDoc.getPageCount()} Pages`;
                 } catch (error) {
                     console.error('Error loading PDF:', error);
-                    showAlert('Error', 'Failed to load PDF file.');
+                    showAlert('错误', '加载PDF文件失败。');
                     state.files = [];
                     updateUI();
                     return;
@@ -121,7 +121,7 @@ document.addEventListener('DOMContentLoaded', () => {
         // Cleanup any previous lazy loading observers
         cleanupLazyRendering();
 
-        showLoader('Rendering page previews...');
+        showLoader('正在渲染页面预览...');
 
         try {
             if (!state.pdfDoc) {
@@ -199,7 +199,7 @@ document.addEventListener('DOMContentLoaded', () => {
             );
         } catch (error) {
             console.error('Error rendering visual selector:', error);
-            showAlert('Error', 'Failed to render page previews.');
+            showAlert('错误', '无法渲染页面预览。');
             // Reset the flag on error so the user can try again.
             visualSelectorRendered = false;
         } finally {
@@ -249,7 +249,7 @@ document.addEventListener('DOMContentLoaded', () => {
             (document.getElementById('download-as-zip') as HTMLInputElement)?.checked ||
             false;
 
-        showLoader('Splitting PDF...');
+        showLoader('正在拆分PDF...');
 
         try {
             if (!state.pdfDoc) throw new Error('No PDF document loaded.');
@@ -349,7 +349,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     const zipBlob = await zip.generateAsync({ type: 'blob' });
                     downloadFile(zipBlob, 'split-by-bookmarks.zip');
                     hideLoader();
-                    showAlert('Success', 'PDF split successfully!', 'success', () => {
+                    showAlert('成功', 'PDF拆分成功！', 'success', () => {
                         resetState();
                     });
                     return;
@@ -376,7 +376,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     const zipBlob2 = await zip2.generateAsync({ type: 'blob' });
                     downloadFile(zipBlob2, 'split-n-times.zip');
                     hideLoader();
-                    showAlert('Success', 'PDF split successfully!', 'success', () => {
+                    showAlert('成功', 'PDF拆分成功！', 'success', () => {
                         resetState();
                     });
                     return;
@@ -391,7 +391,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 splitMode === 'all' ||
                 (['range', 'visual'].includes(splitMode) && downloadAsZip)
             ) {
-                showLoader('Creating ZIP file...');
+                showLoader('正在创建ZIP文件...');
                 const zip = new JSZip();
                 for (const index of uniqueIndices) {
                     const newPdf = await PDFLibDocument.create();
@@ -423,7 +423,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 visualSelectorRendered = false;
             }
 
-            showAlert('Success', 'PDF split successfully!', 'success', () => {
+            showAlert('成功', 'PDF拆分成功！', 'success', () => {
                 resetState();
             });
 

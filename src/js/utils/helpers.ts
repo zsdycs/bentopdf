@@ -164,16 +164,16 @@ let qpdfInstance: any = null;
 export async function initializeQpdf() {
   if (qpdfInstance) return qpdfInstance;
 
-  showLoader('Initializing PDF engine...');
-  try {
+  showLoader('正在初始化PDF引擎...');
+  try{
     qpdfInstance = await createModule({
       locateFile: () => '/qpdf.wasm',
     });
   } catch (error) {
     console.error('Failed to initialize qpdf-wasm:', error);
     showAlert(
-      'Initialization Error',
-      'Could not load the PDF engine. Please refresh the page and try again.'
+      '初始化错误',
+      '无法加载PDF引擎。请刷新页面并重试。'
     );
     throw error;
   } finally {

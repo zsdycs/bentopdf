@@ -38,7 +38,7 @@ export async function combineToSinglePage() {
   const backgroundColor = hexToRgb(backgroundColorHex);
   const separatorColor = hexToRgb(separatorColorHex);
 
-  showLoader('Combining pages...');
+  showLoader('正在合并页面...');
   try {
     const sourceDoc = state.pdfDoc;
     const newDoc = await PDFLibDocument.create();
@@ -212,7 +212,7 @@ export async function combineToSinglePage() {
     );
   } catch (e) {
     console.error(e);
-    showAlert('Error', 'An error occurred while combining pages.');
+    showAlert('错误', '合并页面时发生错误。');
   } finally {
     hideLoader();
   }

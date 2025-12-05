@@ -8,7 +8,7 @@ pdfjsLib.GlobalWorkerOptions.workerSrc = new URL('pdfjs-dist/build/pdf.worker.mi
 
 
 export async function pdfToWebp() {
-  showLoader('Converting to WebP...');
+  showLoader('正在转换为WebP...');
   try {
     const pdf = await getPDFDocument(
       await readFileAsArrayBuffer(state.files[0])
@@ -34,7 +34,7 @@ export async function pdfToWebp() {
     downloadFile(zipBlob, 'converted_webp.zip');
   } catch (e) {
     console.error(e);
-    showAlert('Error', 'Failed to convert PDF to WebP.');
+    showAlert('错误', '将PDF转换为WebP失败。');
   } finally {
     hideLoader();
   }

@@ -102,7 +102,7 @@ worker.onmessage = (e: MessageEvent<ExtractAttachmentResponse>) => {
     zip.generateAsync({ type: 'blob' }).then((zipBlob) => {
       downloadFile(zipBlob, 'extracted-attachments.zip');
 
-      showAlert('Success', `${attachments.length} attachment(s) extracted successfully!`);
+      showAlert('成功', `${attachments.length} 个附件提取成功！`);
 
       showStatus(
         `Extraction completed! ${attachments.length} attachment(s) in zip file (${formatBytes(totalSize)}). Download started.`,

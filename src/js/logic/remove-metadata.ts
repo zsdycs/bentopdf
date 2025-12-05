@@ -46,7 +46,7 @@ export function removeMetadataFromDoc(pdfDoc) {
 }
 
 export async function removeMetadata() {
-  showLoader('Removing all metadata...');
+  showLoader('正在移除所有元数据...');
   try {
     removeMetadataFromDoc(state.pdfDoc);
 
@@ -57,7 +57,7 @@ export async function removeMetadata() {
     );
   } catch (e) {
     console.error(e);
-    showAlert('Error', 'An error occurred while trying to remove metadata.');
+    showAlert('错误', '尝试移除元数据时发生错误。');
   } finally {
     hideLoader();
   }

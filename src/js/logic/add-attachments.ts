@@ -17,11 +17,11 @@ worker.onmessage = (e) => {
       `attached-${state.files[0].name}`
     );
 
-    showAlert('Success', `${attachments.length} file(s) attached successfully.`);
+    showAlert('成功', `${attachments.length} 个文件附加成功。`);
     clearAttachments();
   } else if (data.status === 'error') {
     hideLoader();
-    showAlert('Error', data.message || 'Unknown error occurred.');
+    showAlert('错误', data.message || '发生未知错误。');
     clearAttachments();
   }
 };
@@ -29,17 +29,17 @@ worker.onmessage = (e) => {
 worker.onerror = (error) => {
   hideLoader();
   console.error('Worker error:', error);
-  showAlert('Error', 'Worker error occurred. Check console for details.');
+  showAlert('错误', '发生Worker错误。请查看控制台以获取详细信息。');
   clearAttachments();
 };
 
 export async function addAttachments() {
   if (!state.files || state.files.length === 0) {
-    showAlert('Error', 'Main PDF is not loaded.');
+    showAlert('错误', '主PDF未加载。');
     return;
   }
   if (attachments.length === 0) {
-    showAlert('No Files', 'Please select at least one file to attach.');
+    showAlert('无文件', '请至少选择一个要附加的文件。');
     return;
   }
 
@@ -54,12 +54,12 @@ export async function addAttachments() {
     pageRange = pageRangeInput?.value?.trim() || '';
 
     if (!pageRange) {
-      showAlert('Error', 'Please specify a page range for page-level attachments.');
+      showAlert('错误', '请为页面级附件指定页面范围。');
       return;
     }
   }
 
-  showLoader('Embedding files into PDF...');
+  showLoader('正在将文件嵌入PDF...');
   try {
     const pdfFile = state.files[0];
     const pdfBuffer = (await readFileAsArrayBuffer(pdfFile)) as ArrayBuffer;
@@ -69,14 +69,14 @@ export async function addAttachments() {
 
     for (let i = 0; i < attachments.length; i++) {
       const file = attachments[i];
-      showLoader(`Reading ${file.name} (${i + 1}/${attachments.length})...`);
+      showLoader(`正在读取 ${file.name} (${i + 1}/${attachments.length})...`);
 
       const fileBuffer = (await readFileAsArrayBuffer(file)) as ArrayBuffer;
       attachmentBuffers.push(fileBuffer);
       attachmentNames.push(file.name);
     }
 
-    showLoader('Attaching files to PDF...');
+    showLoader('正在将文件附加到PDF...');
 
     const message = {
       command: 'add-attachments',
@@ -93,7 +93,7 @@ export async function addAttachments() {
   } catch (error: any) {
     console.error('Error attaching files:', error);
     hideLoader();
-    showAlert('Error', `Failed to attach files: ${error.message}`);
+    showAlert('错误', `附加文件失败：${error.message}`);
     clearAttachments();
   }
 }

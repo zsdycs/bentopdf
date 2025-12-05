@@ -30,7 +30,7 @@ export async function nUpTool() {
   // @ts-expect-error TS(2339) FIXME: Property 'value' does not exist on type 'HTMLEleme... Remove this comment to see the full error message
   const borderColor = hexToRgb(document.getElementById('border-color').value);
 
-  showLoader('Creating N-Up PDF...');
+  showLoader('正在创建N-UpPDF...');
   try {
     const sourceDoc = state.pdfDoc;
     const newDoc = await PDFLibDocument.create();
@@ -121,7 +121,7 @@ export async function nUpTool() {
     );
   } catch (e) {
     console.error(e);
-    showAlert('Error', 'An error occurred while creating the N-Up PDF.');
+    showAlert('错误', '创建N-Up PDF时发生错误。');
   } finally {
     hideLoader();
   }

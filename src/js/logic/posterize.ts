@@ -145,7 +145,7 @@ export async function setupPosterizeTool() {
 }
 
 export async function posterize() {
-  showLoader('Posterizing PDF...');
+  showLoader('正在将PDF海报化...');
   try {
     const rows =
       parseInt(
@@ -279,10 +279,10 @@ export async function posterize() {
       new Blob([new Uint8Array(newPdfBytes)], { type: 'application/pdf' }),
       'posterized.pdf'
     );
-    showAlert('Success', 'Your PDF has been posterized.');
+    showAlert('成功', '您的PDF已被海报化。');
   } catch (e) {
     console.error(e);
-    showAlert('Error', e.message || 'Could not posterize the PDF.');
+    showAlert('错误', e.message || '无法将PDF海报化。');
   } finally {
     hideLoader();
   }

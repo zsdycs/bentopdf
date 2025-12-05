@@ -16,7 +16,7 @@ export async function encrypt() {
       ?.value || '';
 
   if (!userPassword) {
-    showAlert('Input Required', 'Please enter a user password.');
+    showAlert('需要输入', '请输入用户密码。');
     return;
   }
 
@@ -28,16 +28,16 @@ export async function encrypt() {
   let qpdf: any;
 
   try {
-    showLoader('Initializing encryption...');
+    showLoader('正在初始化加密...');
     qpdf = await initializeQpdf();
 
-    showLoader('Reading PDF...');
+    showLoader('正在读取PDF...');
     const fileBuffer = await readFileAsArrayBuffer(file);
     const uint8Array = new Uint8Array(fileBuffer as ArrayBuffer);
 
     qpdf.FS.writeFile(inputPath, uint8Array);
 
-    showLoader('Encrypting PDF with 256-bit AES...');
+    showLoader('正在使用56位 AES 加密PDF...');
 
     const args = [inputPath, '--encrypt', userPassword, ownerPassword, '256'];
 
@@ -66,11 +66,11 @@ export async function encrypt() {
       );
     }
 
-    showLoader('Preparing download...');
+    showLoader('正在准备下载...');
     const outputFile = qpdf.FS.readFile(outputPath, { encoding: 'binary' });
 
     if (!outputFile || outputFile.length === 0) {
-      throw new Error('Encryption resulted in an empty file.');
+      throw new Error('加密结果为空文件。');
     }
 
     const blob = new Blob([outputFile], { type: 'application/pdf' });
@@ -78,19 +78,19 @@ export async function encrypt() {
 
     hideLoader();
 
-    let successMessage = 'PDF encrypted successfully with 256-bit AES!';
+    let successMessage = 'PDF已成功使用56位AES加密！';
     if (!hasDistinctOwnerPassword) {
       successMessage +=
-        ' Note: Without a separate owner password, the PDF has no usage restrictions.';
+        ' 注意：没有单独的所有者密码，PDF没有使用限制。';
     }
 
-    showAlert('Success', successMessage);
+    showAlert('成功', successMessage);
   } catch (error: any) {
     console.error('Error during PDF encryption:', error);
     hideLoader();
     showAlert(
-      'Encryption Failed',
-      `An error occurred: ${error.message || 'The PDF might be corrupted.'}`
+      '加密失败',
+      `发生错误：${error.message || 'PDF可能已损坏。'}`
     );
   } finally {
     try {

@@ -6,10 +6,10 @@ import { PDFDocument as PDFLibDocument } from 'pdf-lib';
 
 export async function webpToPdf() {
   if (state.files.length === 0) {
-    showAlert('No Files', 'Please select at least one WebP file.');
+    showAlert('无文件', '请至少选择一个WebP文件。');
     return;
   }
-  showLoader('Converting WebP to PDF...');
+  showLoader('正在将WebP转换为PDF...');
   try {
     const pdfDoc = await PDFLibDocument.create();
     for (const file of state.files) {

@@ -107,7 +107,7 @@ export async function fixDimensions() {
     );
   } catch (e) {
     console.error(e);
-    showAlert('Error', 'An error occurred while standardizing pages.');
+    showAlert('错误', '标准化页面时发生错误。');
   } finally {
     hideLoader();
   }

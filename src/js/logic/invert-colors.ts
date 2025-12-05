@@ -9,7 +9,7 @@ pdfjsLib.GlobalWorkerOptions.workerSrc = new URL('pdfjs-dist/build/pdf.worker.mi
 
 export async function invertColors() {
   if (!state.pdfDoc) {
-    showAlert('Error', 'PDF not loaded.');
+    showAlert('错误', 'PDF未加载。');
     return;
   }
   showLoader('Inverting PDF colors...');
@@ -61,7 +61,7 @@ export async function invertColors() {
     );
   } catch (e) {
     console.error(e);
-    showAlert('Error', 'Could not invert PDF colors.');
+    showAlert('错误', '无法反转PDF颜色。');
   } finally {
     hideLoader();
   }

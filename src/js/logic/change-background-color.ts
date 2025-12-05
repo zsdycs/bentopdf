@@ -6,7 +6,7 @@ import { PDFDocument as PDFLibDocument, rgb } from 'pdf-lib';
 
 export async function changeBackgroundColor() {
   if (!state.pdfDoc) {
-    showAlert('Error', 'PDF not loaded.');
+    showAlert('错误', 'PDF未加载。');
     return;
   }
 
@@ -14,7 +14,7 @@ export async function changeBackgroundColor() {
   const colorHex = document.getElementById('background-color').value;
   const color = hexToRgb(colorHex);
 
-  showLoader('Changing background color...');
+  showLoader('正在更改背景颜色...');
   try {
     const newPdfDoc = await PDFLibDocument.create();
 
@@ -48,7 +48,7 @@ export async function changeBackgroundColor() {
     );
   } catch (e) {
     console.error(e);
-    showAlert('Error', 'Could not change the background color.');
+    showAlert('错误', '无法更改背景颜色。');
   } finally {
     hideLoader();
   }

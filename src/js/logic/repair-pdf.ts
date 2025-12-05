@@ -59,7 +59,7 @@ export async function repairPdfFile(file: File): Promise<Uint8Array | null> {
 
 export async function repairPdf() {
     if (state.files.length === 0) {
-        showAlert('No Files', 'Please select one or more PDF files.');
+        showAlert('无文件', '请选择一个或多个PDF文件。');
         return;
     }
 
@@ -67,7 +67,7 @@ export async function repairPdf() {
     const failedRepairs: string[] = [];
 
     try {
-        showLoader('Initializing repair engine...');
+        showLoader('正在初始化修复引擎...');
 
         for (let i = 0; i < state.files.length; i++) {
             const file = state.files[i];
@@ -88,7 +88,7 @@ export async function repairPdf() {
         hideLoader();
 
         if (successfulRepairs.length === 0) {
-            showAlert('Repair Failed', 'Unable to repair any of the uploaded PDF files.');
+            showAlert('修复失败', '无法修复任何上传的PDF文件。');
             return;
         }
 
@@ -105,7 +105,7 @@ export async function repairPdf() {
             const blob = new Blob([file.data as any], { type: 'application/pdf' });
             downloadFile(blob, file.name);
         } else {
-            showLoader('Creating ZIP archive...');
+            showLoader('正在创建ZIP存档...');
             const zip = new JSZip();
             successfulRepairs.forEach((file) => {
                 zip.file(file.name, file.data);
@@ -117,12 +117,12 @@ export async function repairPdf() {
         }
 
         if (failedRepairs.length === 0) {
-            showAlert('Success', 'All files repaired successfully!');
+            showAlert('成功', '所有文件修复成功！');
         }
 
     } catch (error: any) {
         console.error('Critical error during repair:', error);
         hideLoader();
-        showAlert('Error', 'An unexpected error occurred during the repair process.');
+        showAlert('错误', '修复过程中发生意外错误。');
     }
 }

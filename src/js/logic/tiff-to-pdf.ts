@@ -6,10 +6,10 @@ import { decode } from 'tiff';
 
 export async function tiffToPdf() {
   if (state.files.length === 0) {
-    showAlert('No Files', 'Please select at least one TIFF file.');
+    showAlert('无文件', '请至少选择一个TIFF文件。');
     return;
   }
-  showLoader('Converting TIFF to PDF...');
+  showLoader('正在将TIFF转换为PDF...');
   try {
     const pdfDoc = await PDFLibDocument.create();
     for (const file of state.files) {

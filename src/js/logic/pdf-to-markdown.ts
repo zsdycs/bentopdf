@@ -3,7 +3,7 @@ import { downloadFile, readFileAsArrayBuffer, getPDFDocument } from '../utils/he
 import { state } from '../state.js';
 
 export async function pdfToMarkdown() {
-  showLoader('Converting to Markdown...');
+  showLoader('正在转换为Markdown...');
   try {
     const file = state.files[0];
     const arrayBuffer = await readFileAsArrayBuffer(file);

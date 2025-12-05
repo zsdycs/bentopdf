@@ -6,7 +6,7 @@ import { getRotationState, resetRotationState } from '../handlers/fileHandler.js
 import { PDFDocument, degrees } from 'pdf-lib';
 
 export async function rotate() {
-  showLoader('Applying rotations...');
+  showLoader('正在应用旋转...');
   try {
     const originalPdf = state.pdfDoc;
     const pageCount = originalPdf.getPageCount();
@@ -61,7 +61,7 @@ export async function rotate() {
     });
   } catch (e) {
     console.error(e);
-    showAlert('Error', 'Could not apply rotations.');
+    showAlert('错误', '无法应用旋转。');
   } finally {
     hideLoader();
   }

@@ -54,7 +54,7 @@ function encodeBMP(imageData: any) {
 }
 
 export async function pdfToBmp() {
-  showLoader('Converting PDF to BMP images...');
+  showLoader('正在将PDF转换为BMP图片...');
   try {
     const pdf = await getPDFDocument(
       await readFileAsArrayBuffer(state.files[0])

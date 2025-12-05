@@ -17,16 +17,16 @@ export async function removeRestrictions() {
   let qpdf: any;
 
   try {
-    showLoader('Initializing...');
+    showLoader('正在初始化...');
     qpdf = await initializeQpdf();
 
-    showLoader('Reading PDF...');
+    showLoader('正在读取PDF...');
     const fileBuffer = await readFileAsArrayBuffer(file);
     const uint8Array = new Uint8Array(fileBuffer as ArrayBuffer);
 
     qpdf.FS.writeFile(inputPath, uint8Array);
 
-    showLoader('Removing restrictions...');
+    showLoader('正在移除限制...');
 
     const args = [inputPath];
 
@@ -55,7 +55,7 @@ export async function removeRestrictions() {
       );
     }
 
-    showLoader('Preparing download...');
+    showLoader('正在准备下载...');
     const outputFile = qpdf.FS.readFile(outputPath, { encoding: 'binary' });
 
     if (!outputFile || outputFile.length === 0) {

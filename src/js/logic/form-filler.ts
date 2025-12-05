@@ -9,7 +9,7 @@ let viewerReady = false;
 export async function setupFormFiller() {
   if (!state.files || !state.files[0]) return;
 
-  showLoader('Loading PDF form...');
+  showLoader('正在加载PDF表单...');
   const pdfViewerContainer = document.getElementById('pdf-viewer-container');
 
   if (!pdfViewerContainer) {
@@ -53,7 +53,7 @@ export async function setupFormFiller() {
 
 export async function processAndDownloadForm() {
   if (!viewerIframe || !viewerReady) {
-    showAlert('Viewer not ready', 'Please wait for the form to finish loading.');
+    showAlert('查看器未就绪', '请等待表单加载完成。');
     return;
   }
 

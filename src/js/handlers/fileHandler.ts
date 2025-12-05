@@ -42,7 +42,7 @@ export function resetRotationState() {
 }
 
 async function handleSinglePdfUpload(toolId, file) {
-  showLoader('Loading PDF...');
+  showLoader('正在加载PDF...');
   try {
     // For form-filler, bypass pdf-lib (can't handle XFA) and use PDF.js
     if (toolId === 'form-filler') {
@@ -79,8 +79,8 @@ async function handleSinglePdfUpload(toolId, file) {
       toolId !== 'remove-restrictions'
     ) {
       showAlert(
-        'Protected PDF',
-        'This PDF is password-protected. Please use the Decrypt or Change Permissions tool first.'
+        '受保护的PDF',
+        '此PDF受密码保护。请先使用解密或修改权限工具。'
       );
       switchView('grid');
       return;
@@ -204,7 +204,7 @@ async function handleSinglePdfUpload(toolId, file) {
 
     if (toolId === 'view-metadata') {
       const resultsDiv = document.getElementById('metadata-results');
-      showLoader('Analyzing full PDF metadata...');
+      showLoader('正在分析完整的PDF元数据...');
 
       try {
         const pdfBytes = await readFileAsArrayBuffer(state.files[0]);
@@ -434,8 +434,8 @@ async function handleSinglePdfUpload(toolId, file) {
       } catch (e) {
         console.error('Failed to view metadata or fields:', e);
         showAlert(
-          'Error',
-          'Could not fully analyze the PDF. It may be corrupted or have an unusual structure.'
+          '错误',
+          '无法完全分析PDF。它可能已损坏或具有异常结构。'
         );
       } finally {
         hideLoader();
@@ -477,13 +477,13 @@ async function handleSinglePdfUpload(toolId, file) {
 
         const keyInput = document.createElement('input');
         keyInput.type = 'text';
-        keyInput.placeholder = 'Key (e.g., Department)';
+        keyInput.placeholder = '键 (例如，部门)';
         keyInput.className =
           'custom-meta-key w-full sm:w-1/3 bg-gray-800 border border-gray-600 text-white rounded-lg p-2';
 
         const valueInput = document.createElement('input');
         valueInput.type = 'text';
-        valueInput.placeholder = 'Value (e.g., Marketing)';
+        valueInput.placeholder = '值 (例如，市场部)';
         valueInput.className =
           'custom-meta-value w-full sm:flex-grow bg-gray-800 border border-gray-600 text-white rounded-lg p-2';
 
@@ -556,8 +556,8 @@ async function handleSinglePdfUpload(toolId, file) {
   } catch (e) {
     hideLoader();
     showAlert(
-      'Error',
-      'Could not load PDF. The file may be invalid, corrupted, or password-protected.'
+      '错误',
+      '无法加载PDF。文件可能无效、已损坏或受密码保护。'
     );
     console.error(e);
   }
@@ -569,7 +569,7 @@ async function handleMultiFileUpload(toolId) {
     toolId === 'alternate-merge' ||
     toolId === 'reverse-pages'
   ) {
-    showLoader('Loading PDF documents...');
+    showLoader('正在加载PDF文档...');
 
     const pdfFilesUnloaded: File[] = [];
 
@@ -603,10 +603,10 @@ async function handleMultiFileUpload(toolId) {
         encryptedPDFFileNames.push(encryptedPDF.file.name);
       });
 
-      const errorMessage = `PDFs found that are password-protected\n\nPlease use the Decrypt or Change Permissions tool on these files first:\n\n${encryptedPDFFileNames.join('\n')}`;
+      const errorMessage = `发现受密码保护的PDF\n\n请先对这些文件使用解密或修改权限工具：\n\n${encryptedPDFFileNames.join('\n')}`;
 
       hideLoader(); // Hide loader before showing alert
-      showAlert('Protected PDFs', errorMessage);
+      showAlert('受保护的PDF', errorMessage);
 
       switchView('grid');
 
@@ -764,7 +764,7 @@ export function setupFileInputHandler(toolId) {
       const validFiles = newFiles.filter(file => validTypes.includes(file.type));
 
       if (validFiles.length < newFiles.length) {
-        showAlert('Invalid Files', 'Some files were skipped because they are not supported images.');
+        showAlert('无效文件', '某些文件被跳过，因为它们不是支持的图像。');
       }
 
       newFiles = validFiles;

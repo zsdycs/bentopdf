@@ -9,10 +9,10 @@ export async function extractPages() {
   // @ts-expect-error TS(2339) FIXME: Property 'value' does not exist on type 'HTMLEleme... Remove this comment to see the full error message
   const pageInput = document.getElementById('pages-to-extract').value;
   if (!pageInput.trim()) {
-    showAlert('Invalid Input', 'Please enter page numbers to extract.');
+    showAlert('无效输入', '请输入要提取的页码。');
     return;
   }
-  showLoader('Extracting pages...');
+  showLoader('正在提取页面...');
   try {
     const totalPages = state.pdfDoc.getPageCount();
     const indicesToExtract = new Set();
@@ -39,7 +39,7 @@ export async function extractPages() {
     }
 
     if (indicesToExtract.size === 0) {
-      showAlert('Invalid Input', 'No valid pages selected for extraction.');
+      showAlert('无效输入', '没有选择有效的要提取的页面。');
       hideLoader();
       return;
     }
@@ -63,7 +63,7 @@ export async function extractPages() {
     downloadFile(zipBlob, 'extracted-pages.zip');
   } catch (e) {
     console.error(e);
-    showAlert('Error', 'Could not extract pages.');
+    showAlert('错误', '无法提取页面。');
   } finally {
     hideLoader();
   }

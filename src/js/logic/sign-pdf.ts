@@ -12,7 +12,7 @@ const signState = {
 export async function setupSignTool() {
   document.getElementById('signature-editor').classList.remove('hidden');
 
-  showLoader('Loading PDF viewer...');
+  showLoader('正在加载PDF查看器...');
 
   const container = document.getElementById('canvas-container-sign');
   if (!container) {
@@ -105,14 +105,14 @@ export async function setupSignTool() {
 
 export async function applyAndSaveSignatures() {
   if (!signState.viewerReady || !signState.viewerIframe) {
-    showAlert('Viewer not ready', 'Please wait for the PDF viewer to load.');
+    showAlert('查看器未就绪', '请等待PDF查看器加载。');
     return;
   }
 
   try {
     const viewerWindow: any = signState.viewerIframe.contentWindow;
     if (!viewerWindow || !viewerWindow.PDFViewerApplication) {
-      showAlert('Viewer not ready', 'The PDF viewer is still initializing.');
+      showAlert('查看器未就绪', 'PDF查看器仍在初始化。');
       return;
     }
 
@@ -121,7 +121,7 @@ export async function applyAndSaveSignatures() {
     const shouldFlatten = flattenCheckbox?.checked;
 
     if (shouldFlatten) {
-      showLoader('Flattening and saving PDF...');
+      showLoader('正在拼合并保存PDF...');
 
       const rawPdfBytes = await app.pdfDocument.saveDocument(app.pdfDocument.annotationStorage);
 
@@ -151,6 +151,6 @@ export async function applyAndSaveSignatures() {
   } catch (error) {
     console.error('Failed to export the signed PDF:', error);
     hideLoader();
-    showAlert('Export failed', 'Could not export the signed PDF. Please try again.');
+    showAlert('导出失败', '无法导出签名的PDF。请重试。');
   }
 }

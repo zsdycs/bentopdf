@@ -178,7 +178,7 @@ async function renderPageMergeThumbnails() {
                     onProgress: (current, total) => {
                         currentPageNumber++;
                         showLoader(
-                            `Rendering page previews...`
+                            `渲染页面预览中...`
                         );
                     },
                     onBatchComplete: () => {
@@ -207,7 +207,7 @@ const updateUI = async () => {
 
     if (state.files.length > 0) {
         if (fileControls) fileControls.classList.remove('hidden');
-        if (mergeOptions) mergeOptions.classList.remove('hidden');
+        if (mergeOptions) mergeOptions.classList.remove('hidden');       
         await refreshMergeUI();
     } else {
         if (fileControls) fileControls.classList.add('hidden');
@@ -255,7 +255,7 @@ const resetState = async () => {
 
 
 export async function merge() {
-    showLoader('Merging PDFs...');
+    showLoader('合并PDF中...');
     try {
         // @ts-ignore
         const jobs: MergeJob[] = [];
@@ -473,7 +473,7 @@ export async function refreshMergeUI() {
         input.id = `range-${safeFileName}`;
         input.className =
             'w-full bg-gray-800 border border-gray-600 text-white rounded-md p-2 text-sm mt-1 focus:border-indigo-500 focus:ring-1 focus:ring-indigo-500 transition-colors';
-        input.placeholder = 'Leave blank for all pages';
+        input.placeholder = '全部页面';
 
         rangeDiv.append(label, input);
         li.append(mainDiv, rangeDiv);
@@ -555,7 +555,7 @@ document.addEventListener('DOMContentLoaded', () => {
         fileInput.addEventListener('change', async (e) => {
             const files = (e.target as HTMLInputElement).files;
             if (files && files.length > 0) {
-                state.files = [...state.files, ...Array.from(files)];
+                state.files = [...state.files, ...Array.from(files)];       
                 await updateUI();
             }
             fileInput.value = '';
@@ -584,9 +584,9 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         });
 
-        dropZone.addEventListener('click', () => {
-            fileInput.click();
-        });
+        // dropZone.addEventListener('click', () => {
+        //     fileInput.click();
+        // });
     }
 
     if (addMoreBtn) {

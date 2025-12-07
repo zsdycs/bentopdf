@@ -39,9 +39,9 @@ function initializePage() {
             }
         });
 
-        dropZone.addEventListener('click', () => {
-            fileInput?.click();
-        });
+        // dropZone.addEventListener('click', () => {
+        //     fileInput?.click();
+        // });
     }
 
     document.getElementById('back-to-tools')?.addEventListener('click', () => {

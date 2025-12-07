@@ -539,9 +539,9 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         });
 
-        dropZone.addEventListener('click', () => {
-            fileInput.click();
-        });
+        // dropZone.addEventListener('click', () => {
+        //     fileInput.click();
+        // });
     }
 
     if (addMoreBtn) {

@@ -43,9 +43,9 @@ function initializePage() {
             }
         });
 
-        dropZone.addEventListener('click', () => {
-            fileInput?.click();
-        });
+        // dropZone.addEventListener('click', () => {
+        //     fileInput?.click();
+        // });
     }
 
     if (addMoreBtn) {
